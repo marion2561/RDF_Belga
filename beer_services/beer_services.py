@@ -1,34 +1,45 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, Blueprint
 import pandas as pd
 import random
 
 app = Flask(__name__)
 
+# Créer un Blueprint avec un préfixe de base pour toutes les routes
+beer_services = Blueprint('beer_services', __name__, url_prefix='/beer_services')
+
 # Charger les données des bières
 def load_beers_data():
     try:
-        data = pd.read_csv("beers.csv")
+        data = pd.read_csv("./beer_services/beers.csv")
         return data
     except Exception as e:
         print(f"Error loading beer data: {e}")
         return None
 
-# Route pour obtenir les bières avec un ABV minimum spécifié
-@app.route('/beers', methods=['GET'])
-def beers_by_abv():
+# Route pour obtenir des bières selon le type et/ou un ABV minimum spécifié
+@beer_services.route('/beers', methods=['GET'])
+def get_beers():
     min_abv = request.args.get('min_abv', type=float)
-    if min_abv is None:
-        return jsonify({"error": "Missing 'min_abv' query parameter"}), 400
-
+    beer_type = request.args.get('type', type=str)
+    
     beers = load_beers_data()
-    if beers is not None and not beers.empty:
-        filtered_beers = beers[beers['ABV'] >= min_abv].to_dict(orient="records")
-        if filtered_beers:
-            return jsonify(filtered_beers), 200
-        else:
-            return jsonify({"message": "No beers found with ABV greater than or equal to {}".format(min_abv)}), 404
-    else:
+    if beers is None or beers.empty:
         return jsonify({"error": "Beer data could not be loaded or is empty"}), 500
+
+    if min_abv is not None:
+        beers = beers[beers['ABV'] >= min_abv]
+
+    if beer_type:
+        beers = beers[beers['Type'].str.lower() == beer_type.lower()]
+
+    filtered_beers = beers.to_dict(orient='records')
+    if filtered_beers:
+        return jsonify(filtered_beers), 200
+    else:
+        return jsonify({"message": "No beers found matching the criteria"}), 404
+
+# Enregistrer le Blueprint dans l'application Flask
+app.register_blueprint(beer_services)
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
