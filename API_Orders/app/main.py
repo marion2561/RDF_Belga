@@ -2,8 +2,8 @@ from typing import List
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import json
-from FileReaderUtil import readOrdersFile
-from Objects.Order import *
+from app.FileReaderUtil import readOrdersFile
+from app.Order import Order, serialiser_order
 
 app = FastAPI()
 #Liste des domaines autorisés, '*' signifie tout domaine
@@ -12,7 +12,7 @@ origins = [
     "*",
 ]
 
-# Configuration du middleware CORS
+# Configuration du middleware CORS                              
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,  # Les origines autorisées
@@ -20,6 +20,10 @@ app.add_middleware(
     allow_methods=["GET", "POST", "OPTIONS", "DELETE", "PUT"],  # Les méthodes autorisées
     allow_headers=["X-Requested-With", "Content-Type"],  # Les en-têtes autorisés
 )
+
+@app.get("/")
+def read_root():
+    return {"Hello": "World"}
 
 @app.get("/getOrders")
 def getOrders():
@@ -36,6 +40,3 @@ def getOrdersById(id:str):
     json_data = json.dumps(order, default=serialiser_order)
     print(json_data)
     return order
-
-getOrdersById('1')
-
