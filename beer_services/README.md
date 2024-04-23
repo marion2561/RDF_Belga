@@ -49,15 +49,15 @@ python beer_service.py
 
 ## Utilisation
 
-Pour récupérer des bières par ABV minimum, envoyez une requête GET à l'endpoint ```/beers``` avec le paramètre de requête ```min_abv``` :
+Pour récupérer des bières par ABV minimum, envoyez une requête GET à l'endpoint ```/beer_services/beers``` avec le paramètre de requête ```min_abv``` :
 ```bash
-curl http://127.0.0.1:5000/beers?min_abv=8
+curl http://127.0.0.1:5000/beer_services/beers?min_abv=8
 ```
 *Cette requête retournera toutes les bières avec un ABV de 8% ou plus.*
 
-Pour récupérer des suggestion de 10 bières du moment, envoyez une requête GET à l'endpoit ```/recommandations```
+Pour récupérer des suggestion de 10 bières du moment, envoyez une requête GET à l'endpoit ```/beer_services/recommandations```
 ```bash
-curl http://127.0.0.1:5000/recommandations
+curl http://127.0.0.1:5000/beer_services/recommandations
 ```
 *Cette requête retournera une suggestion de 10 bièrs du moment.*
 
