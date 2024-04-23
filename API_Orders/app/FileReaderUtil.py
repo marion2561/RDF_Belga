@@ -1,13 +1,14 @@
 import csv
 from typing import List
 
-from Objects.Order import Order
-from Objects.OrderLine import OrderLine
+from app.Order import Order
+from app.OrderLine import OrderLine
+
 
 def readOrdersFile():
     OrdersListLines : List[Order] = readOrdersLinesFile()
     OrdersList : List[Order] = []
-    with open('Files/Orders.csv') as csv_file:
+    with open('app/Files/Orders.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         line_count = 0
         for row in csv_reader:
@@ -18,7 +19,7 @@ def readOrdersFile():
 
 def readOrdersLinesFile():
     OrdersListLines : List[Order] = []
-    with open('Files/OrdersLines.csv') as csv_file:
+    with open('app/Files/OrdersLines.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         line_count = 0
         for row in csv_reader:
