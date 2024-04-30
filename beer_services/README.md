@@ -18,7 +18,7 @@ Pour exécuter l'API, vous aurez besoin des éléments suivants :
 Vous pouvez installer les bibliothèques nécessaires avec pip :
 
 ```bash
-pip install flask pandas
+pip install flask pandas flask_cors
 ```
 ## Configuration et Installation
 
