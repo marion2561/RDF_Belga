@@ -1,11 +1,14 @@
 from flask import Flask, jsonify, request, Blueprint
 from flask_cors import CORS
 import pandas as pd
+import openai
+
+openai_apikey = "INSERT HERE"
 
 app = Flask(__name__)
 
 # Configuration de CORS pour autoriser l'origine du client7
-cors = CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 # Créer un Blueprint avec un préfixe de base pour toutes les routes
 beer_services = Blueprint('beer_services', __name__, url_prefix='/beer_services')
