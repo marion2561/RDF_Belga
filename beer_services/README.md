@@ -87,6 +87,18 @@ La réponse sera au format JSON. Par exemple :
 ]
 ```
 
+## Docker
+
+Pour build le container, il faut lancer lac ommande suivante :
+```bash
+docker build -t api_beers .
+```
+
+Pour monter le container
+```bash
+docker run -p 2711:2711 api_beers
+```
+
 ### Erreurs
 
 - **400 Mauvaise Requête** : Si le paramètre ```min_abv``` est manquant.
