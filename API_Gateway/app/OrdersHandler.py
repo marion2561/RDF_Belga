@@ -5,7 +5,7 @@ class OrdersHandler(tornado.web.RequestHandler):
     async def get(self):
         client = tornado.httpclient.AsyncHTTPClient()
         try:
-            response = await client.fetch("http://rdf-orders:85/getOrders")
+            response = await client.fetch("http://api_orders:85/getOrders")
             data = response.body.decode()
             self.write(data)
         except tornado.httpclient.HTTPError as e:
@@ -20,7 +20,7 @@ class OrdersByIdHandler(tornado.web.RequestHandler):
         client = tornado.httpclient.AsyncHTTPClient()
         try:
             # Construction de l'URL avec l'ID de commande
-            url = f"http://rdf-orders:85/getOrdersById/{order_id}"
+            url = f"http://api_orders:85/getOrdersById/{order_id}"
             response = await client.fetch(url)
             data = response.body.decode()
             self.write(data)
@@ -34,7 +34,7 @@ class BeersRecommendationdHandler(tornado.web.RequestHandler):
         client = tornado.httpclient.AsyncHTTPClient()
         try:
             # Construction de l'URL avec l'ID de commande
-            url = f"http://rdf-beers:2711/beer_services/recommandations"
+            url = f"http://rdf-beers:2711/recommandations"
             response = await client.fetch(url)
             data = response.body.decode()
             self.write(data)
@@ -51,7 +51,7 @@ class BeersdHandler(tornado.web.RequestHandler):
         client = tornado.httpclient.AsyncHTTPClient()
         try:
             # Construction de l'URL avec l'ID de commande
-            url = f"http://rdf-beers:2711/beer_services/beers?type={type}&min_abv={min_abv}"
+            url = f"http://api_beers:2711/beers?type={type}&min_abv={min_abv}"
             response = await client.fetch(url)
             data = response.body.decode()
             self.write(data)
