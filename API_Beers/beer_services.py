@@ -11,7 +11,7 @@ app = Flask(__name__)
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 # Créer un Blueprint avec un préfixe de base pour toutes les routes
-beer_services = Blueprint('beer_services', __name__, url_prefix='/beer_services')
+beer_services = Blueprint('beer_services', __name__)
 
 # Charger les données des bières
 def load_beers_data():
