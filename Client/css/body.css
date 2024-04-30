@@ -12,3 +12,8 @@
 #bieres th {
     background-color: #f2f2f2;
 }
+div.relative {
+    position: relative;
+    left: 30px;
+    border: 3px solid #73AD21;
+  }
