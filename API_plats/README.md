@@ -36,7 +36,22 @@ php artisan key:generate
 ```.php
 php artisan serve
 ```
-Par défaut, le serveur devrait démarrer sur http://localhost:8000.
+
+## Configuration Docker
+
+Pour containeriser l'application FastAPI avec Docker, suivez ces étapes :
+
+1. Construisez l'image Docker à partir du Dockerfile :
+   ```bash
+   docker build -t plats-laravel .
+   ```
+
+2. Une fois l'image construite, vous pouvez démarrer le conteneur :
+   ```bash
+   docker run -d --name plats-laravel -p 8000:80 plats-laravel
+   ```
+
+Par défaut, le serveur devrait démarrer sur http://localhost:8000/.
 
 ## Utilisation
 Une fois le serveur lancé, vous pouvez accéder aux services exposés par l'API pour la gestion des plats du restaurant belge. Voici les points d'accès disponibles :

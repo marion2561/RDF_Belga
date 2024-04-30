@@ -168,29 +168,29 @@ cython_debug/
 #.idea/
 
 ### Laravel ###
-plats/vendor/
-plats/.idea
-plats/node_modules/
-plats/npm-debug.log
-plats/yarn-error.log
+API_plats/vendor/
+API_plats/.idea
+API_plats/node_modules/
+API_plats/npm-debug.log
+API_plats/yarn-error.log
 
 # Laravel 4 specific
-plats/bootstrap/compiled.php
-plats/app/storage/
+API_plats/bootstrap/compiled.php
+API_plats/app/storage/
 
 # Laravel 5 & Lumen specific
-plats/public/storage
-plats/public/hot
+API_plats/public/storage
+API_plats/public/hot
 
 # Laravel 5 & Lumen specific with changed public path
-plats/public_html/storage
-plats/public_html/hot
+API_plats/public_html/storage
+API_plats/public_html/hot
 
-plats/storage/*.key
-plats/Homestead.yaml
-plats/Homestead.json
-plats//.vagrant
-plats/.phpunit.result.cache
+API_plats/storage/*.key
+API_plats/Homestead.yaml
+API_plats/Homestead.json
+API_plats//.vagrant
+API_plats/.phpunit.result.cache
 
 ### PhpStorm ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
