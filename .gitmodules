@@ -1,0 +1,3 @@
+[submodule "chemin/vers/plats"]
+	path = chemin/vers/plats
+	url = https://github.com/marion2561/RDF_Belga.git
