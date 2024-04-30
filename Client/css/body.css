@@ -1,0 +1,14 @@
+#bieres {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#bieres th, #bieres td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+#bieres th {
+    background-color: #f2f2f2;
+}
