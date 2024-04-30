@@ -14,8 +14,7 @@ RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 COPY ./app /code/app
 
 # Exposition du port 80
-EXPOSE 80
+EXPOSE 85
 
 # Commande pour démarrer l'application avec Uvicorn
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
-
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "85"]
