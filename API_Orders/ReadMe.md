@@ -9,7 +9,7 @@ API Orders est une application FastAPI conçue pour gérer les commandes et leur
 Pour installer les dépendances nécessaires, exécutez :
 
 ```bash
-pip install -r requirements.txt
+pip freeze > requirements.txt
 ```
 
 ## Démarrage de l'application
@@ -49,7 +49,7 @@ Pour containeriser l'application FastAPI avec Docker, suivez ces étapes :
 
 2. Une fois l'image construite, vous pouvez démarrer le conteneur :
    ```bash
-   docker run -d --name rdf-orders -p 85:85 rdf-orders
+   docker run --network rdf_network -d --name rdf-orders -p 85:85 rdf-orders
    ```
 
 Cela démarrera l'application dans un conteneur Docker, accessible via `localhost:85`.

@@ -9,6 +9,7 @@ app = FastAPI()
 #Liste des domaines autorisés, '*' signifie tout domaine
 origins = [
     "http://localhost:4200",
+    "http://localhost:81",
     "*",
 ]
 

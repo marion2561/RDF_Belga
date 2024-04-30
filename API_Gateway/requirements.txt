@@ -1,0 +1,3 @@
+PyYAML==6.0.1
+tornado==6.4
+tornado-swagger==1.5.0
