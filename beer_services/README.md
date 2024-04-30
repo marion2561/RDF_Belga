@@ -14,11 +14,12 @@ Pour exécuter l'API, vous aurez besoin des éléments suivants :
 - Python 3.6 ou supérieur
 - Flask
 - Pandas
+- Flask-CORS
 
 Vous pouvez installer les bibliothèques nécessaires avec pip :
 
 ```bash
-pip install flask pandas flask_cors
+pip install -r requirements.txt
 ```
 ## Configuration et Installation
 
