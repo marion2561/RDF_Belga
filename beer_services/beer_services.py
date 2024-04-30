@@ -13,11 +13,21 @@ beer_services = Blueprint('beer_services', __name__, url_prefix='/beer_services'
 # Charger les données des bières
 def load_beers_data():
     try:
-        data = pd.read_csv("./beer_services/beers.csv")
+        data = pd.read_csv("./beers.csv")
         return data
     except Exception as e:
         print(f"Error loading beer data: {e}")
         return None
+    
+# Route pour obtenir une recommandation de 10 bières
+@beer_services.route('/recommandations', methods=['GET'])
+def recommandations():
+    beers = load_beers_data()
+    if beers is None or beers.empty:
+        return jsonify({"error": "Beer data could not be loaded or is empty"}), 500
+    else:
+        recommandations_beers = beers.sample(10).to_dict(orient="records")
+        return jsonify(recommandations_beers), 200
 
 # Route pour obtenir des bières selon le type et/ou un ABV minimum spécifié
 @beer_services.route('/beers', methods=['GET'])
@@ -45,4 +55,4 @@ def get_beers():
 app.register_blueprint(beer_services)
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=True, host='0.0.0.0', port=2711)
