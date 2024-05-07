@@ -96,7 +96,7 @@ docker build -t api_beers .
 
 Pour monter le container
 ```bash
-docker run -p 2711:2711 api_beers
+docker run -d -name api_beers -p 2711:2711 api_beers
 ```
 
 ### Erreurs
