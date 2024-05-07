@@ -72,7 +72,7 @@ Pour containeriser l'application FastAPI avec Docker, suivez ces étapes :
 
 2. Une fois l'image construite, vous pouvez démarrer le conteneur :
    ```bash
-   docker run -d --name plats-laravel -p 8000:80 plats-laravel
+   docker run -d --name api_plats -p 8000:80 api_plats
    ```
 
 Par défaut, le serveur devrait démarrer sur http://localhost:8000/.
