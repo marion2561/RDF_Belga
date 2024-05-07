@@ -1,5 +1,5 @@
 # Utilisation de l'image de base Python 3.9
-FROM python:3.9
+FROM python:3.12.2
 
 # Définition du répertoire de travail dans le conteneur
 WORKDIR /code

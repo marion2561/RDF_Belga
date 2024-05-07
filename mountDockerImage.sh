@@ -10,7 +10,7 @@ creer_image() {
     cd $chemin_projet
 
     # Construire l'image Docker
-    docker build -t $nom_projet:$tag .
+    docker build --no-cache -t $nom_projet:$tag .
 
     # Revenir au dossier parent
     cd -
@@ -35,6 +35,7 @@ creer_ou_recreer_conteneur() {
 
 docker network create rdf_network
 
+
 # Projet 1
 echo "Création de l'image pour le projet API_Orders"
 creer_image "api_orders" "API_Orders" "latest"
@@ -53,7 +54,14 @@ creer_ou_recreer_conteneur "api_plats:latest" "api_plats" "8000" "80"
 # Projet 4
 echo "Création de l'image pour le projet API_Gateway"
 creer_image "api_gateway" "API_Gateway" "latest"
-creer_ou_recreer_conteneur "api_gateway:latest" "api_gateway" "81" "81
+creer_ou_recreer_conteneur "api_gateway:latest" "api_gateway" "81" "81"
+
+# Projet 5
+echo "Création de l'image pour le projet API_IABeers"
+creer_image "api_iabeers" "API_IABeers" "latest"
+creer_ou_recreer_conteneur "api_iabeers:latest" "api_iabeers" "89" "89"
+
+
 
 # Créer les conteneurs
 # Vous pouvez ajouter ici des commandes pour démarrer les conteneurs avec les images fraîchement créées
