@@ -53,7 +53,7 @@ creer_ou_recreer_conteneur "api_plats:latest" "api_plats" "8000" "80"
 # Projet 4
 echo "Création de l'image pour le projet API_Gateway"
 creer_image "api_gateway" "API_Gateway" "latest"
-creer_ou_recreer_conteneur "api_gateway:latest" "api_gateway" "81" "81
+creer_ou_recreer_conteneur "api_gateway:latest" "api_gateway" "81" "81"
 
 # Créer les conteneurs
 # Vous pouvez ajouter ici des commandes pour démarrer les conteneurs avec les images fraîchement créées
