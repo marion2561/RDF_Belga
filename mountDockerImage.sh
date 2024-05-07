@@ -10,7 +10,7 @@ creer_image() {
     cd $chemin_projet
 
     # Construire l'image Docker
-    docker build --no-cache -t $nom_projet:$tag .
+    docker build -t $nom_projet:$tag .
 
     # Revenir au dossier parent
     cd -
