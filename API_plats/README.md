@@ -3,6 +3,8 @@ L'API des plats de Bélga offre un service web simple pour récupérer une liste
 ## Prérequis
 Avant de commencer, assurez-vous d'avoir les éléments suivants installés sur votre machine :
 - PHP (version 8.2 ou supérieure)
+- Nodejs
+- npm ou yarn
 - Composer
 - Serveur web (Apache, Nginx, etc.)
 - Git
@@ -28,15 +30,37 @@ cp .env.example .env
 php artisan key:generate
 ```
 
-6. Configurez votre base de données dans le fichier `.env`, ou utilisez un fichier CSV pour les données, cette étape n'est pas nécessaire.
+6. Optimisation du chargement de la configuration
+```.sh
+php artisan config:cache
+```
+7. Optimiser le chargement des routes
+```.sh
+php artisan route:cache
+```
+8. Optimiser le chargement des vues
+```.sh
+php artisan view:cache
+```
+9. Configurez votre base de données dans le fichier `.env`, ou utilisez un fichier CSV pour les données
+   - migrer ou créer la base de données
+   ```.sh
+   php artisan migrate --pretend --force
+   php artisan migrate
+   ```
 
-7. Assurez-vous que le fichier CSV contenant les données des plats est présent dans le chemin suivant : `plats/storage/app/plats/plats.csv`.
+10. Assurez-vous que le fichier CSV contenant les données des plats est présent dans le chemin suivant : `API_plats/storage/app/plats/plats.csv`.
 
-8. Démarrez le serveur de développement Laravel : 
+11. Démarrez le serveur de développement Laravel : 
 ```.php
 php artisan serve
 ```
 
+12. Pour la compilations des assets de Breeze (ou de votre site)
+```.sh
+npm install
+npm run build
+```
 ## Configuration Docker
 
 Pour containeriser l'application FastAPI avec Docker, suivez ces étapes :
