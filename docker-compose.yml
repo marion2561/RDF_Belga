@@ -1,0 +1,41 @@
+version: '3.9'
+services:
+  api_orders:
+    build:
+      context: API_Orders
+      dockerfile: Dockerfile
+    image: api_orders
+    ports:
+      - 85:85
+  api_beers:
+    build:
+      context: API_Beers
+      dockerfile: Dockerfile
+    image: api_beers
+    ports:
+      - 2711:2711
+  api_plats:
+    build:
+      context: API_plats
+      dockerfile: Dockerfile
+    image: api_plats
+    ports:
+      - 8000:80
+  api_ia_beers:
+    build:
+      context: API_IABeers
+      dockerfile: Dockerfile
+    image: api_ia_beers
+    ports:
+      - 89:89    
+  api_gateway:
+    depends_on:
+      - api_orders
+      - api_beers
+      - api_plats
+    build:
+      context: API_Gateway
+      dockerfile: Dockerfile
+    image: api_gateway
+    ports:
+      - 81:81
