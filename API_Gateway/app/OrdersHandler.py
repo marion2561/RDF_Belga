@@ -1,7 +1,19 @@
 import tornado.web
 import tornado.httpclient
 
-class OrdersHandler(tornado.web.RequestHandler):
+class BaseHandler(tornado.web.RequestHandler):
+    def set_default_headers(self):
+        self.set_header("Access-Control-Allow-Origin", "*")
+        self.set_header("Access-Control-Allow-Headers", "Content-Type, x-requested-with")
+        self.set_header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+    
+    def options(self):
+        # Autorise les pré-requêtes CORS pour toutes les méthodes HTTP
+        self.set_status(204)
+        self.finish()
+
+
+class OrdersHandler(BaseHandler):
     async def get(self):
         client = tornado.httpclient.AsyncHTTPClient()
         try:
@@ -15,7 +27,7 @@ class OrdersHandler(tornado.web.RequestHandler):
 
 
 
-class OrdersByIdHandler(tornado.web.RequestHandler):
+class OrdersByIdHandler(BaseHandler):
     async def get(self, order_id):
         client = tornado.httpclient.AsyncHTTPClient()
         try:
@@ -29,7 +41,7 @@ class OrdersByIdHandler(tornado.web.RequestHandler):
         except Exception as e:
             self.write(f"An error occurred: {str(e)}")
 
-class BeersRecommendationdHandler(tornado.web.RequestHandler):
+class BeersRecommendationdHandler(BaseHandler):
     async def get(self):
         client = tornado.httpclient.AsyncHTTPClient()
         try:
@@ -44,7 +56,7 @@ class BeersRecommendationdHandler(tornado.web.RequestHandler):
             self.write(f"An error occurred: {str(e)}")
 
 
-class BeersdHandler(tornado.web.RequestHandler):
+class BeersdHandler(BaseHandler):
     async def get(self):
         type = self.get_query_argument("type", default=None)
         min_abv = self.get_query_argument("min_abv", default=None)
