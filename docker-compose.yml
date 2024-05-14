@@ -39,3 +39,15 @@ services:
     image: api_gateway
     ports:
       - 81:81
+  client:
+    depends_on:
+      - api_orders
+      - api_beers
+      - api_plats
+      - api_gateway
+    build:
+      context: Client
+      dockerfile: Dockerfile
+    image: client
+    ports:
+      - 80:80
