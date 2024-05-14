@@ -1,5 +1,8 @@
+import json
 import tornado.web
 import tornado.httpclient
+import urllib3
+from urllib.parse import quote
 
 class BaseHandler(tornado.web.RequestHandler):
     def set_default_headers(self):
@@ -36,6 +39,53 @@ class PlatsHandler(BaseHandler):
             self.write("HTTP Error: " + str(e))
         except Exception as e:
             self.write("An error occurred: " + str(e))
+
+class BestBeers(tornado.web.RequestHandler):
+    def initialize(self):
+        self.http = urllib3.PoolManager()
+
+    async def get(self, mealName):
+        try:
+            encoded_mealName = quote(mealName)
+            response = self.http.request('GET', f"http://api_ia_beers:89/getbestbeers/{encoded_mealName}")
+            beers = json.loads(response.data.decode())
+
+            merged_beer_info = await self.merge_beer_info(beers)
+
+            self.write(json.dumps(merged_beer_info, indent=2, ensure_ascii=False))
+        except urllib3.exceptions.HTTPError as e:
+            self.write("HTTP Error: " + str(e))
+        except Exception as e:
+            self.write("An error occurred: " + str(e))
+
+    async def get_beer_details(self, beer_id):
+        url = f"http://api_beers:2711/beers?id={beer_id}"
+        response = self.http.request('GET', url)
+        details = json.loads(response.data.decode())
+        if isinstance(details, list) and details:
+            return details[0]
+        else:
+            raise ValueError("Unexpected response format")
+
+    async def merge_beer_info(self, beer_json):
+        merged_beer_info = []
+        for beer in beer_json:
+            beer_id = beer['Id']
+            detailed_info = await self.get_beer_details(beer_id)
+            merged_info = {
+                "ABV": detailed_info.get("ABV"),
+                "Brewery": detailed_info.get("Brewery"),
+                "Description": detailed_info.get("Description"),
+                "IBU": detailed_info.get("IBU"),
+                "Id": detailed_info.get("Id"),
+                "Image_URL": detailed_info.get("Image_URL"),
+                "Name": detailed_info.get("Name"),
+                "Type": detailed_info.get("Type"),
+                "Explanation": beer.get("Explanation")
+            }
+            merged_beer_info.append(merged_info)
+        return merged_beer_info
+    
 
 class OrdersByIdHandler(BaseHandler):
     async def get(self, order_id):
