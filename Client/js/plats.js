@@ -1,7 +1,7 @@
 // Fonction pour récupérer les données depuis l'API
 function getDataFromAPI() {
     // Utilisez fetch() ou une autre méthode pour faire l'appel à l'API
-    fetch('http://localhost:8000/api/plats')
+    fetch('http://localhost:81/plats')
         .then(response => response.json())
         .then(data => {
             // Convertir l'objet en tableau d'objets
@@ -22,6 +22,7 @@ function fillCards(dataArray) {
             const card = `<div class="col-12 col-md-6 col-lg-4 mb-4">
                             <div class="card h-100">
                                 <img src="${item.image_url}" alt="${item.nom_de_plat}" class="card-img-top" style="height: 200px; object-fit: contain;">
+                                </a>
                                 <div class="card-body">
                                     <h5 class="card-title">${item.nom_de_plat}</h5>
                                     <h6 class="card-subtitle mb-2 text-muted">${item.prix} CHF</h6>
@@ -33,7 +34,14 @@ function fillCards(dataArray) {
                             </div>
                           </div>`;
             cardsContainer.insertAdjacentHTML('beforeend', card);
-    });
 }
+)}  ;
+document.getElementById
 // Appel de la fonction pour récupérer les données
 getDataFromAPI();
+
+//ouverture de la modal au clic sur une carte
+document.getElementById("plats").addEventListener('click', function() {
+    console.log('click');
+    document.getElementById("modalBeer").modal('show');
+});
