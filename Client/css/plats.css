@@ -22,3 +22,14 @@
     max-height: 50px; /* Limite la hauteur du GIF */
     width: auto; /* Ajuste automatiquement la largeur pour garder les proportions */
   }
+
+  .star {
+    color: gold;
+}
+.half-star::before {
+    content: "\f089"; /* Code Unicode pour la demi-étoile */
+    color: gold;
+}
+.empty-star {
+    color: #ccc;
+}

@@ -52,7 +52,7 @@ fetch('http://localhost:81/bestBeers/' + dishName)
             </div>
             <div class="card-body">
             <h5 class="card-title">${beer.Name}</h5>
-            <h6 class="card-subtitle mb-2 text-muted"><strong>Brasserie:</strong> ${beer.Type}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">${beer.Type}</h6>
             <h7 class="card-subtitle mb-2 text-muted">${beer.Brewery}</h7><br><br>
             <h8 class="card-subtitle mb-2 text-muted">Alcool : ${beer.ABV} %</h8>
             <hr>
@@ -78,25 +78,40 @@ function fillCards(dataArray) {
     const cardsContainer = document.querySelector('#plats');
     cardsContainer.innerHTML = ''; // Vide le contenu actuel des cartes
 
-    // Parcours des données et création des cartes
     dataArray.forEach(item => {
-            const card = `<div class="col-12 col-md-6 col-lg-4 mb-4" onclick="openModal('${item.nom_de_plat}')">
-                            <div class="card h-100">
-                                <img src="${item.image_url}" alt="${item.nom_de_plat}" class="card-img-top" style="height: 200px; object-fit: contain;">
-                                </a>
-                                <div class="card-body">
-                                    <h5 class="card-title">${item.nom_de_plat}</h5>
-                                    <h6 class="card-subtitle mb-2 text-muted">${item.prix} CHF</h6>
-                                    <h7 class="card-subtitle mb-2 text-muted">Ingrédients : <br>${item.ingredients} </h7><br><br>
-                                    <h8 class="card-subtitle mb-2 text-muted">Popularité : ${item.popularite} </h8>
-                                    <hr>
-                                    <p class="card-text">${item.description}</p>
-                                </div>
+        const rating = getStarRating(item.popularite); // Calcule les étoiles basées sur la popularité
+
+        const card = `<div class="col-12 col-md-6 col-lg-4 mb-4" onclick="openModal('${item.nom_de_plat}')">
+                        <div class="card h-100">
+                            <img src="${item.image_url}" alt="${item.nom_de_plat}" class="card-img-top" style="height: 200px; object-fit: contain;">
+                            <div class="card-body">
+                                <h5 class="card-title">${item.nom_de_plat}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">${item.prix} CHF</h6>
+                                <h7 class="card-subtitle mb-2 text-muted">Ingrédients : <br>${item.ingredients}</h7><br><br>
+                                <div class="rating">Popularité : ${rating + ' ' + item.popularite}</div>
+                                <hr>
+                                <p class="card-text">${item.description}</p>
                             </div>
-                          </div>`;
-            cardsContainer.insertAdjacentHTML('beforeend', card);
+                        </div>
+                      </div>`;
+        cardsContainer.insertAdjacentHTML('beforeend', card);
+    });
 }
-)}  ;
+
+function getStarRating(popularity) {
+    let stars = "";
+    for (let i = 0; i < 5; i++) {
+        if (popularity - i >= 1) {
+            stars += '<i class="fas fa-star star"></i>';
+        } else if (popularity - i > 0 && popularity - i < 1) {
+            stars += '<i class="fas fa-star-half-alt half-star"></i>';
+        } else {
+            stars += '<i class="far fa-star empty-star"></i>';
+        }
+    }
+    return stars;
+}
+
 document.getElementById
 // Appel de la fonction pour récupérer les données
 getDataFromAPI();
