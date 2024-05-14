@@ -18,12 +18,13 @@ function getDataFromAPI() {
 let minAbv = 0;
 let beerType = '';
 
-// Fonction pour remplir les cartes avec les données récupérées
 function fillCards(data) {
-    const cardsContainer = document.querySelector('#bieres');
-    cardsContainer.innerHTML = ''; // Vide le contenu actuel des cartes
+    const cardsContainer = document.querySelector('#cardsContainer');
+    cardsContainer.innerHTML = '';
 
-    // Parcours des données et création des cartes
+    // Trie les données par nom
+    data.sort((a, b) => a.Name.localeCompare(b.Name));
+
     data.forEach(item => {
         if (item.ABV >= minAbv && (beerType === '' || item.Type === beerType)) {
             const card = `<div class="col-12 col-md-6 col-lg-4 mb-4">
@@ -70,6 +71,16 @@ document.querySelector('#typeSelect').addEventListener('change', event => {
     beerType = event.target.value;
     fillCards(beersData); // Utilise les données stockées au lieu de faire un nouvel appel API
 });
+
+// Écouteur d'événements pour la barre de recherche
+document.querySelector('#searchBar').addEventListener('input', searchBeer);
+
+// Fonction pour rechercher une bière par nom
+function searchBeer(event) {
+    const searchTerm = event.target.value.toLowerCase();
+    const filteredBeers = beersData.filter(beer => beer.Name.toLowerCase().includes(searchTerm));
+    fillCards(filteredBeers);
+}
 
 // Récupère les données initiales
 getDataFromAPI();

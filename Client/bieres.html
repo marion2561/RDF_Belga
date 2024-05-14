@@ -13,6 +13,7 @@
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link href=".\css\headers.css" rel="stylesheet">
   <link href=".\css\body.css" rel="stylesheet">
+  <link href=".\css\beers.css" rel="stylesheet">
 </head>
 <body>
    <!--Menu-->
@@ -34,6 +35,32 @@
     </header>
   </div>
 <main>
+
+<!-- Filtres -->
+<div class="container my-4">
+  <div class="row">
+    <div class="col-md-4">
+      <label for="abvSlider">Alcool minimum :</label>
+      <input type="range" class="form-range" id="abvSlider" min="0" max="15" step="0.1" value="0">
+      <span id="abvSliderValue">0</span>%
+    </div>
+    <div class="col-md-4">
+      <label for="typeSelect">Type de bière :</label>
+      <select class="form-select" id="typeSelect">
+        <option value="">Tous les types</option>
+        <!-- Les options seront remplies dynamiquement -->
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label for="searchBar">Rechercher :</label>
+      <div class="input-group">
+        <input type="text" class="form-control" id="searchBar" placeholder="Nom...">
+        <button class="btn btn-primary" type="button">J'ai soif !</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Cards -->
 <div class="container">
   <div class="row" id="bieres">
