@@ -3,7 +3,7 @@ input[type=range]::-webkit-slider-thumb {
     appearance: none;
     width: 20px;
     height: 20px;
-    background: url('/img/belga.png') no-repeat;
+    background: url('./img/belga.png') no-repeat;
     background-size: cover;
     cursor: pointer;
   }
@@ -11,7 +11,7 @@ input[type=range]::-webkit-slider-thumb {
   input[type=range]::-moz-range-thumb {
     width: 20px;
     height: 20px;
-    background: url('/img/belga.png') no-repeat;
+    background: url('./img/belga.png') no-repeat;
     background-size: cover;
     cursor: pointer;
   }
