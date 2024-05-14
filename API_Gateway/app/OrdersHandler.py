@@ -32,7 +32,7 @@ class PlatsHandler(BaseHandler):
     async def get(self):
         client = tornado.httpclient.AsyncHTTPClient()
         try:
-            response = await client.fetch("http://api_plats:8000/api/plats")
+            response = await client.fetch("http://api_plats:80/api/plats")
             data = response.body.decode()
             self.write(data)
         except tornado.httpclient.HTTPError as e:
