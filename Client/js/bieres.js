@@ -18,13 +18,12 @@ function getDataFromAPI() {
 let minAbv = 0;
 let beerType = '';
 
+// Fonction pour remplir les cartes avec les données récupérées
 function fillCards(data) {
-    const cardsContainer = document.querySelector('#cardsContainer');
-    cardsContainer.innerHTML = '';
+    const cardsContainer = document.querySelector('#bieres');
+    cardsContainer.innerHTML = ''; // Vide le contenu actuel des cartes
 
-    // Trie les données par nom
-    data.sort((a, b) => a.Name.localeCompare(b.Name));
-
+    // Parcours des données et création des cartes
     data.forEach(item => {
         if (item.ABV >= minAbv && (beerType === '' || item.Type === beerType)) {
             const card = `<div class="col-12 col-md-6 col-lg-4 mb-4">
