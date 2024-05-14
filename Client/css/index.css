@@ -1,0 +1,114 @@
+/* Style pour l'intro-header */
+.intro-header {
+    background-color: #ff9800;
+    color: #fff;
+    padding: 2em;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.intro-header h1 {
+    margin-bottom: 0.5em;
+    font-size: 2.5em;
+}
+
+.intro-header .subtitle {
+    font-size: 1.2em;
+    font-style: italic;
+}
+
+/* Style pour les informations sur la bière */
+#beer-info {
+    background: #fff;
+    padding: 2em;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    text-align: center;
+    margin: 2em auto;
+}
+
+#beer-info h2 {
+    margin-bottom: 1em;
+    font-size: 2em;
+}
+
+#beer-image {
+    max-width: 100%;
+    max-height: 400px; /* Taille maximale définie */
+    height: auto;
+    width: auto; /* Assure que l'image respecte les proportions */
+    border-radius: 10px;
+    margin-bottom: 1em;
+}
+
+#beer-details p {
+    margin-bottom: 0.5em;
+    line-height: 1.6;
+}
+
+#beer-details p strong {
+    color: #555;
+}
+
+/* Style pour mettre en valeur l'explication */
+.menu-highlight {
+    background-color: #ff9800;
+    color: #fff;
+    padding: 1.5em;
+    border-radius: 10px;
+    margin-top: 1em;
+    font-size: 1.2em;
+    font-style: italic;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Spinner styling */
+.spinner {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #ff9800;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Cacher le contenu initialement */
+.hidden {
+    display: none;
+}
+
+/* Footer styling */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1em;
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    main {
+        padding: 1em;
+    }
+
+    #beer-info {
+        padding: 1em;
+    }
+
+    #beer-info h2 {
+        font-size: 1.5em;
+    }
+}

@@ -28,6 +28,13 @@ services:
     image: api_ia_beers
     ports:
       - 89:89    
+  api_ia_menu:
+    build:
+      context: API_IAMenu
+      dockerfile: Dockerfile
+    image: api_ia_menu
+    ports:
+      - 88:88    
   api_gateway:
     depends_on:
       - api_orders
