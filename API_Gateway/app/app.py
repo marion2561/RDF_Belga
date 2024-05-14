@@ -1,8 +1,7 @@
 import tornado.ioloop
 from tornado.web import Application, RequestHandler
-from tornado_swagger.setup import setup_swagger
 
-from OrdersHandler import BeersRecommendationdHandler, BeersdHandler, OrdersByIdHandler, OrdersHandler, PlatsHandler
+from OrdersHandler import BeersRecommendationdHandler, BeersdHandler, OrdersByIdHandler, OrdersHandler, PlatsHandler, BestBeers
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
@@ -16,6 +15,7 @@ def make_app():
         (r"/beers", BeersdHandler),
         (r"/recommandations", BeersRecommendationdHandler),
         (r"/plats", PlatsHandler),
+        (r"/bestBeers/(.*)", BestBeers),
     ])
     return app
 

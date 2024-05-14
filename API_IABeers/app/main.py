@@ -60,7 +60,7 @@ def extract_brewery_description(beer_list):
         # On construit la chaîne "Brewery - Description" pour chaque bière et on l'ajoute à la liste
         result.append('[')
         if "Brewery" in beer and "Description" in beer:
-            result.append(f"{beer['Brewery']},")
+            result.append(f"{beer['Id']} - {beer['Name']},")
     # On joint toutes les chaînes de la liste en les séparant par une nouvelle ligne
     result.append(']')
     return ''.join(result)
@@ -87,7 +87,7 @@ def requestBestBeers(meal:str):
     classify_beers = Task(
         description = f"Get the perfect three beers for this meal '{meal}'",
         agent = classifier,
-        expected_output = "A JSON structured like that: [{'BeerName':'string', 'Description':'string'}]. Description has to be in french"
+        expected_output = "A JSON structured like that: [{'Id':'Integer', BeerName':'string', 'Explanation':'string'}]. Description has to be in french. And the ID came from original list"
     )
 
     crew = Crew(
