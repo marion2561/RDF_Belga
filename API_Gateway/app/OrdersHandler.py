@@ -25,7 +25,17 @@ class OrdersHandler(BaseHandler):
         except Exception as e:
             self.write("An error occurred: " + str(e))
 
-
+class PlatsHandler(BaseHandler):
+    async def get(self):
+        client = tornado.httpclient.AsyncHTTPClient()
+        try:
+            response = await client.fetch("http://api_plats:8000/api/plats")
+            data = response.body.decode()
+            self.write(data)
+        except tornado.httpclient.HTTPError as e:
+            self.write("HTTP Error: " + str(e))
+        except Exception as e:
+            self.write("An error occurred: " + str(e))
 
 class OrdersByIdHandler(BaseHandler):
     async def get(self, order_id):
@@ -46,7 +56,7 @@ class BeersRecommendationdHandler(BaseHandler):
         client = tornado.httpclient.AsyncHTTPClient()
         try:
             # Construction de l'URL avec l'ID de commande
-            url = f"http://rdf-beers:2711/recommandations"
+            url = f"http://api_beers:2711/recommandations"
             response = await client.fetch(url)
             data = response.body.decode()
             self.write(data)
