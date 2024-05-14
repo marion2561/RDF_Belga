@@ -52,10 +52,10 @@ fetch('http://localhost:81/bestBeers/' + dishName)
             </div>
             <div class="card-body">
             <h5 class="card-title">${beer.Name}</h5>
-            <p class="card-text"><strong>Brasserie:</strong> ${beer.Brewery}</p>
-            <p class="card-text"><strong>Type:</strong> ${beer.Type}</p>
-            <p class="card-text"><strong>ABV:</strong> ${beer.ABV}%</p>
-            <p class="card-text"><strong>IBU:</strong> ${beer.IBU}</p>
+            <h6 class="card-subtitle mb-2 text-muted"><strong>Brasserie:</strong> ${beer.Type}</h6>
+            <h7 class="card-subtitle mb-2 text-muted">${beer.Brewery}</h7><br><br>
+            <h8 class="card-subtitle mb-2 text-muted">Alcool : ${beer.ABV} %</h8>
+            <hr>
             <p class="card-text"><strong>Description:</strong> ${beer.Description}</p>
             <p class="card-text"><strong>Explication du choix:</strong> ${beer.Explanation}</p>
             </div>
