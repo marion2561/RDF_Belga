@@ -3,8 +3,6 @@ from flask_cors import CORS
 import pandas as pd
 import openai
 
-openai_apikey = "INSERT HERE"
-
 app = Flask(__name__)
 
 # Configuration de CORS pour autoriser l'origine du client7
