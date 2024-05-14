@@ -1,0 +1,24 @@
+.beer-img-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px; /* Hauteur fixe pour le conteneur */
+  }
+
+  .beer-img {
+    max-height: 100%; /* Limite la hauteur de l'image à 100% de la hauteur du conteneur */
+    width: auto; /* Ajuste automatiquement la largeur pour garder les proportions */
+  }
+
+  /* Style pour le GIF de chargement */
+  .loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px; /* Hauteur totale de la section de chargement */
+  }
+
+  .loading-spinner img {
+    max-height: 50px; /* Limite la hauteur du GIF */
+    width: auto; /* Ajuste automatiquement la largeur pour garder les proportions */
+  }

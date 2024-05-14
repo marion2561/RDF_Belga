@@ -40,7 +40,7 @@ class PlatsHandler(BaseHandler):
         except Exception as e:
             self.write("An error occurred: " + str(e))
 
-class BestBeers(tornado.web.RequestHandler):
+class BestBeers(BaseHandler):
     def initialize(self):
         self.http = urllib3.PoolManager()
 

@@ -13,13 +13,74 @@ function getDataFromAPI() {
             console.error('Erreur lors de la récupération des données:', error);
         });
 }
+
+ // Fonction pour ouvrir la modal
+function openModal(dishName) {
+var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
+var modalBodyContent = document.getElementById('modalBodyContent');
+
+// Vider le contenu précédent et afficher le GIF de chargement
+modalBodyContent.innerHTML = `
+    <div class="loading-spinner">
+    <img src="https://i.gifer.com/ZZ5H.gif" alt="Loading...">
+    </div>
+`;
+
+// Ouvrir la modal
+myModal.show();
+
+// Faire l'appel API
+fetch('http://localhost:81/bestBeers/' + dishName)
+    .then(response => response.json())
+    .then(data => {
+    // Vider le contenu précédent
+    modalBodyContent.innerHTML = '';
+
+    // Créer une rangée pour les bières
+    var row = document.createElement('div');
+    row.className = 'row';
+
+    // Parcourir les données et remplir la modal
+    data.forEach(beer => {
+        var col = document.createElement('div');
+        col.className = 'col-md-4 mb-3'; // Utilisation des colonnes pour la grille Bootstrap
+
+        col.innerHTML = `
+        <div class="card h-100">
+            <div class="beer-img-container">
+            <img src="${beer.Image_URL}" class="beer-img" alt="${beer.Name}">
+            </div>
+            <div class="card-body">
+            <h5 class="card-title">${beer.Name}</h5>
+            <p class="card-text"><strong>Brasserie:</strong> ${beer.Brewery}</p>
+            <p class="card-text"><strong>Type:</strong> ${beer.Type}</p>
+            <p class="card-text"><strong>ABV:</strong> ${beer.ABV}%</p>
+            <p class="card-text"><strong>IBU:</strong> ${beer.IBU}</p>
+            <p class="card-text"><strong>Description:</strong> ${beer.Description}</p>
+            <p class="card-text"><strong>Explication du choix:</strong> ${beer.Explanation}</p>
+            </div>
+        </div>
+        `;
+        row.appendChild(col);
+    });
+
+    modalBodyContent.appendChild(row);
+    })
+    .catch(error => {
+    console.error('Erreur lors de la récupération des données:', error);
+    modalBodyContent.innerHTML = '<p class="text-danger">Erreur lors de la récupération des données.</p>';
+    });
+}
+
+
+
 function fillCards(dataArray) {
     const cardsContainer = document.querySelector('#plats');
     cardsContainer.innerHTML = ''; // Vide le contenu actuel des cartes
 
     // Parcours des données et création des cartes
     dataArray.forEach(item => {
-            const card = `<div class="col-12 col-md-6 col-lg-4 mb-4">
+            const card = `<div class="col-12 col-md-6 col-lg-4 mb-4" onclick="openModal('${item.nom_de_plat}')">
                             <div class="card h-100">
                                 <img src="${item.image_url}" alt="${item.nom_de_plat}" class="card-img-top" style="height: 200px; object-fit: contain;">
                                 </a>
@@ -39,9 +100,3 @@ function fillCards(dataArray) {
 document.getElementById
 // Appel de la fonction pour récupérer les données
 getDataFromAPI();
-
-//ouverture de la modal au clic sur une carte
-document.getElementById("plats").addEventListener('click', function() {
-    console.log('click');
-    document.getElementById("modalBeer").modal('show');
-});

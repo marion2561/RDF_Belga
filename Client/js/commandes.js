@@ -1,6 +1,5 @@
 // Fonction pour récupérer les données depuis l'API
     function getDataFromAPI() {
-        console.log("ok");
         // Utilisez fetch() ou une autre méthode pour faire l'appel à l'API
         fetch('http://localhost:81/getOrders')
             .then(response => response.json())
