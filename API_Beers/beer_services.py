@@ -35,6 +35,7 @@ def recommandations():
 def get_beers():
     min_abv = request.args.get('min_abv', type=float)
     beer_type = request.args.get('type', type=str)
+    id_beer = request.args.get('id', type=int)
     
     beers = load_beers_data()
     if beers is None or beers.empty:
@@ -45,6 +46,9 @@ def get_beers():
 
     if beer_type:
         beers = beers[beers['Type'].str.lower() == beer_type.lower()]
+
+    if id_beer:
+        beers = beers[beers['Id'] == id_beer]
 
     filtered_beers = beers.to_dict(orient='records')
     if filtered_beers:
