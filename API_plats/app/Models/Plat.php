@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use League\Csv\Reader;
+use League\Csv\Writer;
 
 class Plat extends Model
 {
@@ -39,8 +40,8 @@ class Plat extends Model
     public static function create(array $data)
     {
         $filePath = storage_path('app/plats/plats.csv');
-        $csv = Reader::createFromPath($filePath, 'a+');
-        $csv->setHeaderOffset(0);
+        $csv = Writer::createFromPath($filePath, 'a+'); // 'a+' mode to append data
+        $csv->setHeaderOffset(0); // assuming there is a header
 
         $csv->insertOne($data);
     }
@@ -49,7 +50,7 @@ class Plat extends Model
     public function updatePlat(array $data)
     {
         $filePath = storage_path('app/plats/plats.csv');
-        $csv = Reader::createFromPath($filePath, 'r+');
+        $csv = Writer::createFromPath($filePath, 'r+');
         $csv->setHeaderOffset(0);
 
         $records = $csv->getRecords();
@@ -69,16 +70,15 @@ class Plat extends Model
     public function deletePlat()
     {
         $filePath = storage_path('app/plats/plats.csv');
-        $csv = Reader::createFromPath($filePath, 'r+');
-        $csv->setHeaderOffset(0);
+        $csv = Reader::createFromPath($filePath, 'r');
+        $csv->setHeaderOffset(0); // assuming there is a header
 
-        $records = $csv->getRecords();
-
-        $filteredRecords = array_filter($records, function ($record) {
-            return $record['id'] != $this->id;
+        $results = collect($csv->getRecords())->reject(function ($record) {
+            return $record['id'] == $this->id; // assume you have id as the identifier
         });
 
-        $csv = Writer::createFromPath($filePath, 'w+');
-        $csv->insertAll($filteredRecords);
+        $writer = Writer::createFromPath($filePath, 'w'); // 'w' mode to truncate and rewrite data
+        $writer->insertOne($csv->getHeader()); // reinsert header
+        $writer->insertAll($results); // reinsert remaining data
     }
 }

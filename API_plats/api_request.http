@@ -1,0 +1,26 @@
+### Get all plats
+GET http://localhost:8000/api/plats
+
+### Get single plat
+GET http://localhost:8000/api/plats/1
+
+### Create a new plat
+POST http://localhost:8000/api/plats
+Content-Type: application/json
+
+{
+    "nom_de_plat": "Ratatouille",
+    "description": "Un ragoût de légumes provençal composé d'aubergines, de courgettes, de poivrons et de tomates.",
+    "categorie" : "Plat principal",
+    "prix": "12.00",
+    "ingredients": "Aubergines, courgettes, poivrons, tomates, oignon, ail, huile d'olive",
+    "allergenes": "-",
+    "temps_de_preparation": "20",
+    "temps_de_cuisson": "60",
+    "disponibilite": "Disponible",
+    "popularite": "4.5",
+    "image_url": "https://www.howtocook.recipes/wp-content/uploads/2021/05/Ratatouille-recipe.jpg"
+}
+
+### Delete a plat
+DELETE http://localhost:8000/api/plats/16

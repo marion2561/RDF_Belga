@@ -40,8 +40,6 @@ RUN sed -i 's/DocumentRoot \/var\/www\/html/DocumentRoot \/var\/www\/html\/publi
 # Generate security key
 RUN php artisan key:generate
 # Optimizing Configuration loading
-RUN php artisan migrate --pretend --force && php artisan migrate
-
 RUN php artisan config:cache
 # Optimizing Route loading
 RUN php artisan route:cache
