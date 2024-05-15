@@ -13,9 +13,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 return response.json();
             })
             .then(data => {
+                console.log(data);
                 document.getElementById('beer-image').src = data.Image_URL;
                 document.getElementById('beer-description').textContent = data.Description;
                 document.getElementById('menu-name').textContent = data.Name + " - " + data.MealName;
+                document.getElementById('meal-image').src = data.MealUrl; // Ajoute l'image du plat
                 document.getElementById('beer-explanation').textContent = data.Explanation;
                 
                 // Cacher le spinner et afficher les informations
@@ -35,4 +37,3 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initial fetch with retries
     fetchData(maxRetries);
 });
-

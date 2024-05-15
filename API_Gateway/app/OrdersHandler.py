@@ -95,6 +95,7 @@ class MenuHandler(BaseHandler):
         try:
             response = self.http.request('GET', f"http://api_ia_menu:88/getMenu")
             beers = json.loads(response.data.decode())
+            
 
             merged_beer_info = await self.merge_beer_info(beers)
 
@@ -112,23 +113,32 @@ class MenuHandler(BaseHandler):
             return details[0]
         else:
             raise ValueError("Unexpected response format")
+        
+    async def get_meal_details(self, meal_id):
+        url = f"http://api_plats:80/api/plats/{meal_id}"
+        response = self.http.request('GET', url)
+        details = json.loads(response.data.decode())
+        return details
 
     async def merge_beer_info(self, beer_json):
         beer_json = beer_json[0]
         beer_id = beer_json['IdBeer']
-        detailed_info = await self.get_beer_details(beer_id)
+        meal_id = beer_json['IdMeal']
+        detailed_info_beer = await self.get_beer_details(beer_id)
+        detailed_info_meal = await self.get_meal_details(meal_id)
         merged_info = {
-            "ABV": detailed_info.get("ABV"),
-            "Brewery": detailed_info.get("Brewery"),
-            "Description": detailed_info.get("Description"),
-            "IBU": detailed_info.get("IBU"),
-            "Id": detailed_info.get("Id"),
-            "Image_URL": detailed_info.get("Image_URL"),
-            "Name": detailed_info.get("Name"),
-            "Type": detailed_info.get("Type"),
+            "ABV": detailed_info_beer.get("ABV"),
+            "Brewery": detailed_info_beer.get("Brewery"),
+            "Description": detailed_info_beer.get("Description"),
+            "IBU": detailed_info_beer.get("IBU"),
+            "Id": detailed_info_beer.get("Id"),
+            "Image_URL": detailed_info_beer.get("Image_URL"),
+            "Name": detailed_info_beer.get("Name"),
+            "Type": detailed_info_beer.get("Type"),
             "Explanation": beer_json.get("Explanation"),
             "IdMeal": beer_json.get("IdMeal"),
-            "MealName": beer_json.get("MealName")
+            "MealName": beer_json.get("MealName"),
+            "MealUrl": detailed_info_meal.get("image_url")
         }
         return merged_info
 
