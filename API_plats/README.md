@@ -8,62 +8,74 @@ Avant de commencer, assurez-vous d'avoir les éléments suivants installés sur 
 - Composer
 - Serveur web (Apache, Nginx, etc.)
 - Git
-## Installation
-1. Clonez ce référentiel sur votre machine locale :
+## Installation en local
+1. Installer ou mettre à jour les dépendances sur le serveur.
+```
+apt update && apt install -y \
+    libpng-dev \
+    libjpeg-dev \
+    nodejs \
+    npm \
+    libfreetype6-dev \
+    zip \
+    unzip \
+    git
+```
+2. Clonez ce référentiel sur votre machine locale :
 ```.sh
 git clone https://github.com/marion2561/RDF_Belga.git
 ```
-2. Accédez au répertoire du projet :
+3. Accédez au répertoire du projet :
 ```.sh
 cd RDF_BELGA/plats
 ```
-3. Installez les dépendances PHP via Composer :
+4. Installez les dépendances PHP via Composer :
 ```.sh
 composer install
 ```
-4. Copiez le fichier .env.example et renommez-le en .env :
+5. Copiez le fichier .env.example et renommez-le en .env :
 ```.sh
 cp .env.example .env
 ```
-5. Générez une nouvelle clé d'application Laravel :
+6. Générez une nouvelle clé d'application Laravel :
 ```.sh
 php artisan key:generate
 ```
 
-6. Optimisation du chargement de la configuration
+7. Optimisation du chargement de la configuration
 ```.sh
 php artisan config:cache
 ```
-7. Optimiser le chargement des routes
+8. Optimiser le chargement des routes
 ```.sh
 php artisan route:cache
 ```
-8. Optimiser le chargement des vues
+9. Optimiser le chargement des vues
 ```.sh
 php artisan view:cache
 ```
-9. Configurez votre base de données dans le fichier `.env`, ou utilisez un fichier CSV pour les données
+10. Configurez votre base de données dans le fichier `.env`, ou utilisez un fichier CSV pour les données
    - migrer ou créer la base de données
    ```.sh
    php artisan migrate --pretend --force
    php artisan migrate
    ```
 
-10. Assurez-vous que le fichier CSV contenant les données des plats est présent dans le chemin suivant : `API_plats/storage/app/plats/plats.csv`.
+11. Assurez-vous que le fichier CSV contenant les données des plats est présent dans le chemin suivant : `API_plats/storage/app/plats/plats.csv`.
 
-11. Démarrez le serveur de développement Laravel : 
+12. Démarrez le serveur de développement Laravel : 
 ```.php
 php artisan serve
 ```
 
-12. Pour la compilations des assets de Breeze (ou de votre site)
+13. Pour la compilations des assets de Breeze (ou de votre site)
 ```.sh
 npm install
 npm run build
 ```
-## Configuration Docker
+## Instalation et Configuration avec Docker
 
-Pour containeriser l'application FastAPI avec Docker, suivez ces étapes :
+Pour containeriser l'application des plats avec Docker, suivez ces étapes :
 
 1. Construisez l'image Docker à partir du Dockerfile :
    ```bash
